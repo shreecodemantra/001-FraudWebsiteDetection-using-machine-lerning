@@ -1,0 +1,69 @@
+{% extends 'header2.html'%}
+{% block content %}
+
+<body style="margin:0; font-family: Arial; background:#fff3e0;">
+
+    <div style="width:100%; height:100vh; display:flex; justify-content:center; align-items:center;">
+        <div style="width:80%; background:white; padding:30px; border-radius:8px;
+                    box-shadow:0 0 10px rgba(0,0,0,0.2);">
+
+            <h2 style="text-align:center; color:#ff6f00;">Add new product</h2>
+            {% if error %}
+            <p style="color:rgb(8, 99, 5); text-align:center; font-weight:bold;">
+                {{ error }}
+            </p>
+            {% endif %}
+
+            <form method="POST" action="/add-product" enctype="multipart/form-data">
+
+                <!-- Product Name -->
+                <div class="mb-3">
+                    <label class="form-label">Product Name</label>
+                    <input type="text" name="name" class="form-control" placeholder="Enter product name" required>
+                </div>
+
+                <!-- Category -->
+                <div class="mb-3">
+                    <label class="form-label">Category</label>
+                    <select name="category" class="form-select" required>
+                        <option value="">Select Category</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Clothing">Clothing</option>
+                        <option value="Groceries">Groceries</option>
+                        <option value="Home">Home</option>
+                    </select>
+                </div>
+
+                <!-- Price -->
+                <div class="mb-3">
+                    <label class="form-label">Price</label>
+                    <input type="number" name="price" class="form-control" placeholder="Enter price" required>
+                </div>
+
+                <!-- Old Price -->
+                <div class="mb-3">
+                    <label class="form-label">Old Price</label>
+                    <input type="number" name="old_price" class="form-control" placeholder="Enter old price (optional)">
+                </div>
+
+                <!-- Image -->
+                <div class="mb-4">
+                    <label class="form-label">Product Image</label>
+                    <input type="file" name="image" class="form-control" required>
+                </div>
+
+                <!-- Submit -->
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-success btn-lg" style="color:#ff6f00; text-decoration:none;">
+                        Add Product
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</body>
+
+{% endblock %}

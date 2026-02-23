@@ -1,0 +1,44 @@
+{% extends 'header.html'%}
+{% block content %}
+<body style="margin:0; font-family: Arial; background:#fff3e0;">
+
+    <div style="width:100%; height:100vh; display:flex; justify-content:center; align-items:center;">
+        <div style="width:80%; background:white; padding:30px; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.2);">
+
+            <h2 style="text-align:center; color:#ff6f00;">Login</h2>
+            {% if error %}
+            <p style="color:red; text-align:center; font-weight:bold;">
+                {{ error }}
+            </p>
+            {% endif %}
+
+            <form id="reservation-form" name="gs" method="POST" role="search" action="/login">
+                <label>Email</label><br>
+                <input type="email" name="email" value="yash.salvi1209@gmail.com" required
+                       style="width:100%; padding:10px; margin-top:5px; margin-bottom:15px;
+                              border:1px solid #ff9800; border-radius:4px;"><br>
+
+                <label>Password</label><br>
+                <input type="password" name="password" value="Yash@1234" required
+                       style="width:100%; padding:10px; margin-top:5px; margin-bottom:20px;
+                              border:1px solid #ff9800; border-radius:4px;"><br>
+
+                <button type="submit"
+                        style="width:100%; padding:10px; background:#ff6f00;
+                               color:white; border:none; border-radius:4px;
+                               font-size:16px; cursor:pointer;">
+                    Login
+                </button>
+            </form>
+
+            <p style="text-align:center; margin-top:15px;">
+                New user?
+                <a href="/register" style="color:#ff6f00; text-decoration:none;">Register here</a>
+            </p>
+
+        </div>
+    </div>
+
+</body>
+
+{% endblock %}

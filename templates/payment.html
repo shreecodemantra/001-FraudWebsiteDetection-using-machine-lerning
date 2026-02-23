@@ -1,0 +1,45 @@
+{% extends 'header1.html'%}
+{% block content %}
+
+<body style="margin:0; font-family: Arial; background:#fff3e0;">
+
+  <div style="width:100%; height:100vh; display:flex; justify-content:center; align-items:center;">
+    <div style="width:80%; background:white; padding:30px; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.2);">
+
+      {% if prediction %}
+      {% if "FRAUDULENT" in prediction.upper() %}
+      <p style="color:red; text-align:center; font-weight:bold; font-size: x-large;">
+        The predicted result of transaction is {{ prediction }}
+      </p>
+      <p style="color:red; text-align:center; font-weight:bold; font-size: larger;">
+        Fraud Probability: {{ fraud_prob }}
+      </p>
+      {% else %}
+      <p style="color:green; text-align:center; font-weight:bold; font-size: x-large;">
+        The predicted result of transaction is {{ prediction }}
+      </p>
+      <p style="color:red; text-align:center; font-weight:bold; font-size: larger;">
+        Fraud Probability: {{ fraud_prob }}
+      </p>
+      {% endif %}
+      {% endif %}
+
+      <h2 style="text-align:center; color:#ff6f00;">Payment Page</h2>
+      {% if error %}
+      <p style="color:red; text-align:center; font-weight:bold;">
+        {{ error }}
+      </p>
+      {% endif %}
+
+      <form action="/payment-success" method="post">
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_51Mo3OJSDM2aTW7qpSQiAmFup231FtplENwgKPRyvS0nE88TC80Q4PRRAhe1ZtN7nPMdEenjUq0c9nAaQutqMFmw800z66Qqi9e"
+          data-amount="{{ trans_amount * 100 }}" data-name="Secure Payment" data-description="Order Payment" data-currency="inr">
+          </script>
+      </form>
+
+    </div>
+  </div>
+
+</body>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'header1.html'%}
+{% block content %}
+
+<body style="margin:0; font-family: Arial; background:#fff3e0;">
+
+  <div style="width:100%; height:100vh; display:flex; justify-content:center; align-items:center;">
+    <div style="width:80%; background:white; padding:30px; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.2);">
+
+      {% if result %}
+      {% if "FRAUDULENT" in result.upper() %}
+      <p style="color:red; text-align:center; font-weight:bold; font-size: x-large;">
+        The predicted result of transaction is {{ result }}
+      </p>
+      {% else %}
+      <p style="color:green; text-align:center; font-weight:bold; font-size: x-large;">
+        The predicted result of transaction is {{ result }}
+      </p>
+      {% endif %}
+      {% endif %}
+
+      <h2 style="text-align:center; color:#ff6f00;">OTP Verification</h2>
+      {% if error %}
+      <p style="color:red; text-align:center; font-weight:bold;">
+        {{ error }}
+      </p>
+      {% endif %}
+
+      <form id="reservation-form" name="gs" method="POST" role="search">
+        <label>OTP</label><br>
+        <input type="number" name="otp" value="yash.salvi1209@gmail.com" required style="width:100%; padding:10px; margin-top:5px; margin-bottom:15px;
+                              border:1px solid #ff9800; border-radius:4px;" placeholder="Enter OTP" required><br>
+
+        <button type="submit" style="width:100%; padding:10px; background:#ff6f00;
+                               color:white; border:none; border-radius:4px;
+                               font-size:16px; cursor:pointer;">
+          Verify OTP
+        </button>
+      </form>
+
+    </div>
+  </div>
+
+</body>
+
+{% endblock %}

@@ -1,0 +1,253 @@
+{% extends 'header1.html'%}
+{% block content %}
+<style>
+    /* LIST VIEW */
+    .list-view .col-lg-4 {
+        width: 100%;
+    }
+
+    .list-view .product-item {
+        display: flex;
+        align-items: center;
+        text-align: left;
+    }
+
+    .list-view .product-item-inner {
+        display: flex;
+        width: 100%;
+    }
+
+    .list-view .product-item-inner-item img {
+        width: 180px !important;
+        height: auto !important;
+        margin-right: 20px;
+    }
+
+    .list-view .text-center {
+        text-align: left !important;
+    }
+</style>
+
+
+<!-- Single Page Header start -->
+<div class="container-fluid page-header py-5">
+    <h1 class="text-center text-white display-6 wow fadeInUp" data-wow-delay="0.1s">Shop Page</h1>
+    <ol class="breadcrumb justify-content-center mb-0 wow fadeInUp" data-wow-delay="0.3s">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+        <li class="breadcrumb-item active text-white">Shop</li>
+    </ol>
+</div>
+<!-- Single Page Header End -->
+
+
+<!-- Products Offer Start -->
+<div class="container-fluid bg-light py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
+                <a href="#" class="d-flex align-items-center justify-content-between border bg-white rounded p-4">
+                    <div>
+                        <p class="text-muted mb-3">Find The Best Camera for You!</p>
+                        <h3 class="text-primary">Smart Camera</h3>
+                        <h1 class="display-3 text-secondary mb-0">40% <span class="text-primary fw-normal">Off</span>
+                        </h1>
+                    </div>
+                    <img src="/static/img/product-1.png" class="img-fluid" alt="">
+                </a>
+            </div>
+            <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.3s">
+                <a href="#" class="d-flex align-items-center justify-content-between border bg-white rounded p-4">
+                    <div>
+                        <p class="text-muted mb-3">Find The Best Whatches for You!</p>
+                        <h3 class="text-primary">Smart Whatch</h3>
+                        <h1 class="display-3 text-secondary mb-0">20% <span class="text-primary fw-normal">Off</span>
+                        </h1>
+                    </div>
+                    <img src="/static/img/product-2.png" class="img-fluid" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Products Offer End -->
+
+
+<!-- Shop Page Start -->
+<div class="container-fluid shop py-5">
+    <div class="container py-5">
+        <div class="row g-4">
+            <div class="col-lg-12 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="rounded mb-4 position-relative">
+                    <img src="/static/img/product-banner-3.jpg" class="img-fluid rounded w-100" style="height: 250px;"
+                        alt="Image">
+                    <div class="position-absolute rounded d-flex flex-column align-items-center justify-content-center text-center"
+                        style="width: 100%; height: 250px; top: 0; left: 0; background: rgba(242, 139, 0, 0.3);">
+                        <h4 class="display-5 text-primary">SALE</h4>
+                        <h3 class="display-4 text-white mb-4">Get UP To 50% Off</h3>
+                        <a href="#" class="btn btn-primary rounded-pill">Shop Now</a>
+                    </div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-xl-9">
+                        <div class="input-group w-100 mx-auto d-flex">
+                            <input type="search" class="form-control p-3" placeholder="keywords"
+                                aria-describedby="search-icon-1" id="searchInput">
+                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-xl-3">
+                        <ul class="nav nav-pills d-inline-flex text-center py-2 px-2 rounded bg-light mb-4">
+                            <li class="nav-item me-4">
+                                <a class="bg-light" data-bs-toggle="pill" id="gridViewBtn">
+                                    <i class="fas fa-th fa-3x text-primary"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="bg-light" data-bs-toggle="pill" id="listViewBtn">
+                                    <i class="fas fa-bars fa-3x text-primary"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <div id="tab-5" class="tab-pane fade show p-0 active">
+                        <div class="row g-4 product" id="productRow">
+                            {% for p in products %}
+                            <div class="col-lg-4">
+                                <div class="product-item rounded">
+                                    <div class="product-item-inner border rounded">
+                                        <div class="product-item-inner-item">
+                                            <img src="{{ url_for('static', filename='uploads/' ~ p[5]) }}"
+                                                class="img-fluid w-100 rounded-top" style="height: 250px;">
+                                        </div>
+
+                                        <div class="text-center rounded-bottom p-4">
+                                            <a href="#" class="d-block mb-2">{{ p[2] }}</a>
+                                            <a href="#" class="d-block h4 product-name">{{ p[1] }}</a>
+
+                                            {% if p[4] %}
+                                            <del class="me-2 fs-5">${{ p[4] }}</del>
+                                            {% endif %}
+                                            <span class="text-primary fs-5">${{ p[3] }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        class="product-item-add border border-top-0 rounded-bottom text-center p-4 pt-0">
+
+                                        <form method="POST" action="/buynowpage">
+                                            <input type="hidden" name="product_id" value="{{ p[0] }}">
+                                            <input type="hidden" name="product_name" value="{{ p[1] }}">
+                                            <input type="hidden" name="price" value="{{ p[3] }}">
+                                            <input type="hidden" name="category" value="{{ p[2] }}">
+
+                                            <button type="submit" class="btn btn-success rounded-pill w-100">
+                                                Buy Now
+                                            </button>
+                                        </form>
+
+                                        <!-- <a href="#" class="btn btn-primary rounded-pill w-100 mt-2">
+                                            Add To Cart
+                                        </a> -->
+
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                            <div class="col-12 wow fadeInUp" data-wow-delay="0.1s">
+                                <div class="pagination d-flex justify-content-center mt-5">
+                                    <a href="#" class="rounded">&laquo;</a>
+                                    <a href="#" class="active rounded">1</a>
+                                    <a href="#" class="rounded">2</a>
+                                    <a href="#" class="rounded">3</a>
+                                    <a href="#" class="rounded">4</a>
+                                    <a href="#" class="rounded">5</a>
+                                    <a href="#" class="rounded">6</a>
+                                    <a href="#" class="rounded">&raquo;</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Shop Page End -->
+
+<!-- Product Banner Start -->
+<div class="container-fluid py-5">
+    <div class="container pb-5">
+        <div class="row g-4">
+            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
+                <a href="#">
+                    <div class="bg-primary rounded position-relative">
+                        <img src="/static/img/product-banner.jpg" class="img-fluid w-100 rounded" alt="">
+                        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center rounded p-4"
+                            style="background: rgba(255, 255, 255, 0.5);">
+                            <h3 class="display-5 text-primary">EOS Rebel <br> <span>T7i Kit</span></h3>
+                            <p class="fs-4 text-muted">$899.99</p>
+                            <a href="#" class="btn btn-primary rounded-pill align-self-start py-2 px-4">Shop Now</a>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
+                <a href="#">
+                    <div class="text-center bg-primary rounded position-relative">
+                        <img src="/static/img/product-banner-2.jpg" class="img-fluid w-100" alt="">
+                        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center rounded p-4"
+                            style="background: rgba(242, 139, 0, 0.5);">
+                            <h2 class="display-2 text-secondary">SALE</h2>
+                            <h4 class="display-5 text-white mb-4">Get UP To 50% Off</h4>
+                            <a href="#" class="btn btn-secondary rounded-pill align-self-center py-2 px-4">Shop
+                                Now</a>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Product Banner End -->
+
+<script>
+    const searchInput = document.getElementById("searchInput");
+
+    searchInput.addEventListener("keyup", function () {
+        const filter = this.value.toLowerCase();
+
+        // select all product columns inside .product row
+        const columns = document.querySelectorAll(".product > .col-lg-4");
+
+        columns.forEach(col => {
+            const name = col.querySelector(".product-name").innerText.toLowerCase();
+
+            if (name.includes(filter)) {
+                col.classList.remove("d-none");
+            } else {
+                col.classList.add("d-none");
+            }
+        });
+    });
+</script>
+
+<script>
+    const productRow = document.getElementById("productRow");
+    const gridBtn = document.getElementById("gridViewBtn");
+    const listBtn = document.getElementById("listViewBtn");
+
+    gridBtn.addEventListener("click", () => {
+        productRow.classList.remove("list-view");
+    });
+
+    listBtn.addEventListener("click", () => {
+        productRow.classList.add("list-view");
+    });
+</script>
+
+
+{% endblock %}

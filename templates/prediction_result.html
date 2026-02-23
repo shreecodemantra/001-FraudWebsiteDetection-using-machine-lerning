@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fraud Detection Result</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f6f9;
+        }
+        .card {
+            width: 400px;
+            margin: 100px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.15);
+        }
+        .legit {
+            color: green;
+            font-weight: bold;
+        }
+        .fraud {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h3 style="text-align:center;">Prediction Result</h3>
+    <hr>
+
+    <p><b>Model:</b> {{ model }}</p>
+    <p>
+        <b>Transaction Status:</b>
+        <span class="{{ 'fraud' if result == 'FRAUDULENT' else 'legit' }}">
+            {{ result }}
+        </span>
+    </p>
+    <p><b>Fraud Probability:</b> {{ probability }} %</p>
+    <p><b>Risk Level:</b> {{ risk }}</p>
+
+    <div style="text-align:center; margin-top:20px;">
+        <a href="/shop">Back to Shop</a>
+    </div>
+</div>
+
+</body>
+</html>
